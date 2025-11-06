@@ -1,0 +1,40 @@
+site_name: AI Services Documentation
+
+# Uncomment the repo_url if GH Icon is needed on docs page
+# repo_url: https://github.ibm.com/project-ai-services/project-ai-services
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.top
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Commands: commands.md
+  - Chatbot: chatbot.md
+  - Tutorials: tutorial.md
+  - Limitations: limitations.md
+  - Troubleshooting: troubleshooting.md
+  - Airgapped environment: airgapped-environment.md
+  - FAQ: faq.md
