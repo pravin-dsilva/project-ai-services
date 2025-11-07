@@ -25,6 +25,7 @@ const (
 	CheckRHN     = "rhn"
 	CheckPower11 = "power11"
 	CheckRHAIIS  = "rhaiis"
+	CheckNUMA    = "numa"
 )
 
 // validateCmd represents the validate subcommand of bootstrap
@@ -46,6 +47,7 @@ System Checks:
   • RHEL version validation (9.6 or higher)
   • Power 11 architecture validation
   • RHN registration status
+  • NUMA node alignment on LPAR
 
 License:
   • RHAIIS license
@@ -59,7 +61,8 @@ Available checks to skip:
   rhel            - RHEL OS and version check
   rhn             - Red Hat Network registration check
   power11  		  - Power 11 architecture check
-  rhaiis   		  - RHAIIS license check`,
+  rhaiis   		  - RHAIIS license check
+  numa			  - NUMA node check`,
 		Example: `  # Run all validation checks
   aiservices bootstrap validate
 
@@ -98,7 +101,7 @@ Available checks to skip:
 	}
 
 	cmd.Flags().StringSliceVar(&skipChecks, "skip-validation", []string{},
-		"Skip specific validation checks (comma-separated: root,rhel,rhn,power11,rhaiis)")
+		"Skip specific validation checks (comma-separated: root,rhel,rhn,power11,rhaiis, numa)")
 	cmd.Flags().BoolVarP(&verbose, "verbose", "v", false, "Enable verbose output for debugging")
 
 	return cmd
@@ -147,6 +150,13 @@ func RunValidateCmd(skip map[string]bool) error {
 	// 6. Check if Spyre is attached to the system
 	if !skip["spyre"] {
 		if err := validateSpyreAttachment(); err != nil {
+			validationErrors = append(validationErrors, err)
+		}
+	}
+
+	// 7. Validate NUMA nodes set on LPAR
+	if !skip[CheckNUMA] {
+		if err := validateNumaNode(); err != nil {
 			validationErrors = append(validationErrors, err)
 		}
 	}
@@ -275,5 +285,32 @@ func validateSpyreAttachment() error {
 	}
 
 	logger.Info("✅ IBM Spyre Accelerator is attached to the LPAR")
+	return nil
+}
+
+func validateNumaNode() error {
+	logger.Debug("Validating Numa Node config...")
+	cmd := `lscpu | grep -i "NUMA node(s)"`
+	out, err := exec.Command("bash", "-c", cmd).Output()
+	if err != nil {
+		return fmt.Errorf("❌ failed to execute lscpu command: %w", err)
+	}
+
+	fields := strings.Fields(string(out))
+	if len(fields) == 0 {
+		return fmt.Errorf("❌ Failed to get NUMA node fields")
+	}
+
+	numaVal := fields[len(fields)-1]
+	numaCount, err := strconv.Atoi(numaVal)
+	if err != nil {
+		return fmt.Errorf("Error extracting numa count: %w", err)
+	}
+
+	if numaCount != 1 {
+		return fmt.Errorf("❌ Numa node on LPAR is %d, please set NUMA node to 1.", numaCount)
+	}
+
+	logger.Info("✅ NUMA node alignment on LPAR: 1")
 	return nil
 }
