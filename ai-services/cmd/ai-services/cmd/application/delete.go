@@ -72,7 +72,8 @@ var deleteCmd = &cobra.Command{
 		for _, pod := range pods {
 			cmd.Printf("Deleting the pod: %s\n", pod.Name)
 			if err := runtimeClient.DeletePod(pod.Id, utils.BoolPtr(true)); err != nil {
-				errors = append(errors, pod.Name)
+				errMsg := fmt.Sprintf("%s: %v", pod.Name, err)
+				errors = append(errors, errMsg)
 				continue
 			}
 			cmd.Printf("Successfully removed the pod: %s\n", pod.Name)
@@ -80,7 +81,7 @@ var deleteCmd = &cobra.Command{
 
 		// Aggregate errors at the end
 		if len(errors) > 0 {
-			return fmt.Errorf("failed to remove pods: %s", strings.Join(errors, ", "))
+			return fmt.Errorf("failed to remove pods: \n%s", strings.Join(errors, "\n"))
 		}
 
 		return nil

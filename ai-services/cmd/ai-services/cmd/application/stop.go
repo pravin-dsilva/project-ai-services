@@ -127,14 +127,15 @@ func stopApplication(cmd *cobra.Command, client *podman.PodmanClient, appName st
 	for _, pod := range podsToStop {
 		cmd.Printf("Stopping the pod: %s\n", pod.Name)
 		if err := client.StopPod(pod.Id); err != nil {
-			errors = append(errors, pod.Name)
+			errMsg := fmt.Sprintf("%s: %v", pod.Name, err)
+			errors = append(errors, errMsg)
 			continue
 		}
 		cmd.Printf("Successfully stopped the pod: %s\n", pod.Name)
 	}
 
 	if len(errors) > 0 {
-		return fmt.Errorf("failed to stop pods: %s", strings.Join(errors, ", "))
+		return fmt.Errorf("failed to stop pods: \n%s", strings.Join(errors, "\n"))
 	}
 
 	return nil
