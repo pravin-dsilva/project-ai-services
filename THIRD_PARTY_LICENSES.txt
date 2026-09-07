@@ -14,3 +14,66 @@ plex-sans-arabic
 
 The following component is separately licensed under the Apache-2.0 (https://www.apache.org/licenses/LICENSE-2.0) and CNRI-python (https://docs.python.org/3/license.html#cnri-license-agreement-for-python-1-6-1) license:
 regex
+
+Paramiko 5.0.0
+License: LGPL-2.1-only
+Source: https://github.com/paramiko/paramiko/tree/5.0
+License text: https://github.com/paramiko/paramiko/blob/5.0/LICENSE
+
+sentence-splitter 1.4
+License: LGPL-3.0
+Source: https://github.com/mediacloud/sentence-splitter/tree/1.4
+License text: https://github.com/mediacloud/sentence-splitter/blob/1.4/LICENSE
+
+github.com/cyphar/filepath-securejoin v0.5.1
+License: BSD-3-Clause AND MPL-2.0
+Source: https://github.com/cyphar/filepath-securejoin/tree/v0.5.1
+License text: https://github.com/cyphar/filepath-securejoin/blob/v0.5.1/LICENSE.BSD
+Additional license text: https://github.com/cyphar/filepath-securejoin/blob/v0.5.1/LICENSE.MPL-2.0
+
+github.com/hashicorp/errwrap v1.1.0
+License: MPL-2.0
+Source: https://github.com/hashicorp/errwrap/tree/v1.1.0
+License text: https://github.com/hashicorp/errwrap/blob/v1.1.0/LICENSE
+
+github.com/hashicorp/go-cleanhttp v0.5.2
+License: MPL-2.0
+Source: https://github.com/hashicorp/go-cleanhttp/tree/v0.5.2
+License text: https://github.com/hashicorp/go-cleanhttp/blob/v0.5.2/LICENSE
+
+github.com/hashicorp/go-multierror v1.1.1
+License: MPL-2.0
+Source: https://github.com/hashicorp/go-multierror/tree/v1.1.1
+License text: https://github.com/hashicorp/go-multierror/blob/v1.1.1/LICENSE
+
+github.com/hashicorp/go-retryablehttp v0.7.8
+License: MPL-2.0
+Source: https://github.com/hashicorp/go-retryablehttp/tree/v0.7.8
+License text: https://github.com/hashicorp/go-retryablehttp/blob/v0.7.8/LICENSE
+
+certifi 2026.4.22
+License: MPL-2.0
+Source: https://github.com/certifi/python-certifi/tree/2026.04.22
+License text: https://github.com/certifi/python-certifi/blob/2026.04.22/LICENSE
+
+certifi 2026.5.20
+License: MPL-2.0
+Source: https://github.com/certifi/python-certifi/tree/2026.05.20
+License text: https://github.com/certifi/python-certifi/blob/2026.05.20/LICENSE
+
+orjson 3.11.7
+License: MPL-2.0 AND (Apache-2.0 OR MIT)
+Source: https://github.com/ijl/orjson/tree/3.11.7
+License text: https://github.com/ijl/orjson/blob/3.11.7/LICENSE-MPL-2.0
+Additional license text: https://github.com/ijl/orjson/blob/3.11.7/LICENSE-APACHE
+Additional license text: https://github.com/ijl/orjson/blob/3.11.7/LICENSE-MIT
+
+tqdm 4.67.3
+License: MPL-2.0 AND MIT
+Source: https://github.com/tqdm/tqdm/tree/v4.67.3
+License text: https://github.com/tqdm/tqdm/blob/v4.67.3/LICENCE
+
+tqdm 4.68.2
+License: MPL-2.0 AND MIT
+Source: https://github.com/tqdm/tqdm/tree/v4.68.2
+License text: https://github.com/tqdm/tqdm/blob/v4.68.2/LICENCE
